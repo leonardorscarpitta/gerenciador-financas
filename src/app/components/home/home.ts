@@ -9,4 +9,9 @@ import { AddCsv } from "../add-csv/add-csv";
   templateUrl: './home.html'
 })
 export class Home {
+  showOnlyTable = false;
+
+  changeShowOnlyTableStatus(): void {
+    this.showOnlyTable = !this.showOnlyTable;
+  }
 }

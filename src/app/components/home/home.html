@@ -1,6 +1,14 @@
-<main class="flex flex-col items-center justify-center gap-y-16 m-[10%]">
-  <h2 class="font-bold text-4xl">Gerenciar Ações</h2>
-  <app-add-stock></app-add-stock>
-  <app-table-stock></app-table-stock>
-  <app-add-csv></app-add-csv>
-</main>
+@if (!showOnlyTable) {
+  <main class="flex flex-col items-center justify-center gap-y-12 m-[5%]">
+    <h2 class="font-bold text-4xl">Gerenciar Ações</h2>
+    <app-add-stock></app-add-stock>
+    <app-table-stock></app-table-stock>
+    <app-add-csv></app-add-csv>
+    <button (click)="changeShowOnlyTableStatus()" class="cursor-pointer bg-[#999999] text-white font-bold p-2 rounded-full">Mostrar apenas a tabela ➡</button>
+  </main>
+} @else {
+  <main class="flex flex-col gap-y-8 items-center justify-center m-4">
+    <button (click)="changeShowOnlyTableStatus()" class="cursor-pointer bg-[#999999] text-white font-bold p-2 rounded-full">◀ Visualização completa</button>
+    <app-table-stock></app-table-stock>
+  </main>
+}
