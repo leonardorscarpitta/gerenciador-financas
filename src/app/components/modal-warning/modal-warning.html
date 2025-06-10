@@ -1,4 +1,13 @@
-<section class="bg-[#333]">
-  <h3 class="text-white font-extrabold">Aviso - Uso de Dados</h3>
-  <p>Nosso site não coleta dados dos usuários! Tudo é salvo em LocalStorage</p>
-</section>
+@if (showAlert) {
+  <section class="p-56 fixed z-50 top-0 bottom-0 left-0 right-0 bg-[#333] rounded-lg text-white flex flex-col jutify-center items-center gap-y-10">
+    <h3 class="bg-red-500 rounded-lg p-4 font-extrabold text-2xl uppercase">Aviso - Uso de Dados | Privacidade em Primeiro lugar
+    </h3>
+    <p class="text-center text-2xl">
+      Nosso site não coleta nenhum dado pessoal dos usuários (não estamos interessados nisso). Todas as informações inseridas ou geradas são armazenadas exclusivamente no seu navegador, utilizando tecnologias como o Local Storage e Session Storage. Isso significa que seus dados permanecem apenas com você — sem envio para servidores ou terceiros.
+      Essa abordagem foi adotada para garantir total privacidade, ao mesmo tempo em que proporcionamos uma experiência mais rápida, personalizada e segura.
+    </p>
+    <button (click)="closeModal()" class="text-2xl bg-green-500 rounded-lg cursor-pointer py-2 px-8 hover:opacity-60">Entendido</button>
+    <p>Nota: Nosso código é totalmente Open Source, você pode encontra-lo <a class="underline text-blue-300" href="https://github.com/leonardorscarpitta/gerenciador-financas" target="_blank">aqui</a></p>
+  </section>
+}
+
