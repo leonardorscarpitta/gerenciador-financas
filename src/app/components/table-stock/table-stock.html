@@ -1,0 +1,31 @@
+<table class="table-auto mx-auto w-full text-center rounded-4xl shadow-xl text-[#444]">
+  <thead class="bg-gray-100 font-bold">
+    <tr>
+      <th class="p-4">Nome</th>
+      <th class="p-4">Valor Atual</th>
+      <th class="p-4">Valor de Compra</th>
+      <th class="p-4">Quantidade</th>
+      <th class="p-4">Valor Investido</th>
+      <th class="p-4">Valor Atual Total</th>
+      <th class="p-4">Resultado</th>
+      <th class="p-4">Remoção de Ação</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (stock of stocks; let i = $index; track stock.nome) {
+      <tr class="border-b border-gray-200 last:border-b-0">
+        <td class="text-center p-4 font-extrabold">{{ stock.nome }}</td>
+        <td class="text-center p-4">R$ {{ stock.valorAtual }}</td>
+        <td class="text-center p-4">R$ {{ stock.valorCompra }}</td>
+        <td class="text-center p-4">{{ stock.quantidade }}</td>
+        <td class="text-center p-4">R$ {{ stock.valorCompra * stock.quantidade }}</td>
+        <td class="text-center p-4">R$ {{ stock.valorAtual * stock.quantidade }}</td>
+        <td class="text-center p-4" [style.color]="(stock.valorAtual - stock.valorCompra) * stock.quantidade >= 0 ? 'green' : 'red'">
+          R$ {{ (stock.valorAtual - stock.valorCompra) * stock.quantidade }}
+        </td>
+        <td (click)="removeStock(i)" class="hover:opacity-80 cursor-pointer">❌</td>
+      </tr>
+    }
+  </tbody>
+</table>
