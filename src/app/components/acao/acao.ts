@@ -1,20 +1,19 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { STOCK } from '../../mock-acoes';
 
 @Component({
   selector: 'app-acao',
-  imports: [],
   templateUrl: './acao.html'
 })
 export class Acao {
-  @Input() acao!: STOCK;
+  @Input() stock!: STOCK;
 
   get valorInvestido(): number {
-    return this.acao.valorCompra * this.acao.quantidade;
+    return this.stock.valorCompra * this.stock.quantidade;
   }
 
   get valorAtualTotal(): number {
-    return this.acao.valorAtual * this.acao.quantidade;
+    return this.stock.valorAtual * this.stock.quantidade;
   }
 
   get resultado(): number {

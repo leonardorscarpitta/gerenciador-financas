@@ -1,24 +1,15 @@
 <section class="p-8 flex gap-x-8 items-center rounded-4xl shadow-xl text-[#444]">
 
+  <img (click)="stockSerivce.clearAllStocks()" class="cursor-pointer hover:opacity-60" width="50" height="50" src="https://img.icons8.com/ios-filled/50/bursts.png" alt="bursts"/>
+
   <div class="flex flex-col gap-y-2">
     <p class="text-2xl">Nome da ação</p>
     <input 
       [value]="nome"
       (input)="nome = $any($event.target).value"
-      class="border-1 rounded-lg px-1 text-gray-400 border-gray-300" 
+      class="placeholder-gray-500 border-1 rounded-lg px-1 border-gray-300"
       type="text"
       placeholder="Digite o nome da ação"
-    >
-  </div>
-
-  <div class="flex flex-col gap-y-2">
-    <p class="text-2xl">Valor</p>
-    <input
-      [value]="valorCompra"
-      (input)="valorCompra = $any($event.target).value"
-      class="border-1 rounded-lg px-1 text-gray-400 border-gray-300"
-      type="number"
-      placeholder="0"
     >
   </div>
 
@@ -27,12 +18,23 @@
     <input
       [value]="quantidade"
       (input)="quantidade = + $any($event.target).value"
-      class="border-1 rounded-lg px-1 text-gray-400 border-gray-300"
+      class="placeholder-gray-500 border-1 rounded-lg px-1 border-gray-300"
       type="number"
       placeholder="0"
     >
   </div>
 
+  <div class="flex flex-col gap-y-2">
+    <p class="text-2xl">Valor</p>
+    <input
+      [value]="valorCompra"
+      (input)="valorCompra = $any($event.target).value"
+      class="placeholder-gray-500 border-1 rounded-lg px-1 border-gray-300"
+      type="number"
+      placeholder="0"
+    >
+  </div>
+  
   <button (click)="addStock()" class="bg-[#2e72ca] text-white p-4 rounded-lg cursor-pointer hover:opacity-80 active:opacity-60">Adicionar</button>
 
 </section>

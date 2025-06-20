@@ -1,30 +1,46 @@
-<table class="table-auto mx-auto w-full text-center rounded-4xl shadow-xl text-[#444]">
-  <thead class="bg-gray-100 font-bold">
+<table class="table-auto mx-auto text-center rounded-4xl shadow-xl text-[#444]">
+  <thead class="bg-gray-200 font-bold">
     <tr>
       <th class="p-4">Nome</th>
       <th class="p-4">Valor Atual</th>
       <th class="p-4">Valor de Compra</th>
       <th class="p-4">Quantidade</th>
       <th class="p-4">Valor Investido</th>
-      <th class="p-4">Valor Atual Total</th>
       <th class="p-4">Resultado</th>
+      <th class="p-4">Data</th>
+      <th class="p-4">Tipo de ação</th>
       <th class="p-4">Remoção de Ação</th>
     </tr>
   </thead>
 
   <tbody>
-    @for (stock of stocks; let i = $index; track stock.nome) {
+    @if (stockService.getStocks().length == 0) {
+      <tr>
+        <td class="p-24 text-center" colspan="9">
+          <p class="place-self-center font-semibold">Você não tem ações registradas!</p>
+        </td>
+      </tr>
+    }
+    @for (stock of stockService.getStocks(); let i = $index; track stock.nome) {
       <tr class="border-b border-gray-200 last:border-b-0">
-        <td class="text-center p-4 font-extrabold">{{ stock.nome }}</td>
-        <td class="text-center p-4">R$ {{ stock.valorAtual }}</td>
-        <td class="text-center p-4">R$ {{ stock.valorCompra }}</td>
-        <td class="text-center p-4">{{ stock.quantidade }}</td>
-        <td class="text-center p-4">R$ {{ stock.valorCompra * stock.quantidade }}</td>
-        <td class="text-center p-4">R$ {{ stock.valorAtual * stock.quantidade }}</td>
-        <td class="text-center p-4" [style.color]="(stock.valorAtual - stock.valorCompra) * stock.quantidade >= 0 ? 'green' : 'red'">
+        <td class="text-center p-6 font-extrabold">
+          <a class="hover:opacity-70" target="_blank" [href]="stockService.getStockUrl(stock.nome)">{{ stock.nome }}</a>
+        </td>
+        <td class="text-center p-6">R$ {{ stock.valorAtual }}</td>
+        <td class="text-center p-6">R$ {{ stock.valorCompra }}</td>
+        <td class="text-center p-6">{{ stock.quantidade }}</td>
+        <td class="text-center p-6">R$ {{ stock.valorCompra * stock.quantidade }}</td>
+        <td class="text-center p-6" [style.color]="(stock.valorAtual - stock.valorCompra) * stock.quantidade >= 0 ? 'green' : 'red'">
           R$ {{ (stock.valorAtual - stock.valorCompra) * stock.quantidade }}
         </td>
+        <td class="text-center p-6">{{ stock.timestamp }}</td>
+        <td class="text-center p-6">{{ stock.tipoAcao }}</td>
         <td (click)="removeStock(i)" class="hover:opacity-80 cursor-pointer">❌</td>
+      </tr>
+    }
+    @if (stockService.getStocks().length > 0) {
+      <tr>
+        <td class="text-center p-6" colspan="9">{{ stockService.report() }}</td>
       </tr>
     }
   </tbody>

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MOCK_STOCKS, STOCK } from '../../mock-acoes';
+import { Component, inject } from '@angular/core';
+import { Stock } from '../../services/stock-service/stock';
 
 @Component({
   selector: 'app-table-stock',
@@ -7,10 +7,9 @@ import { MOCK_STOCKS, STOCK } from '../../mock-acoes';
   templateUrl: './table-stock.html'
 })
 export class TableStock {
-  stocks: STOCK[] = MOCK_STOCKS;
+  stockService: Stock = inject(Stock);
 
   removeStock(index: number): void {
-    this.stocks.splice(index, 1);
-    alert("Ação removida com sucesso!");
+    this.stockService.removeStock(index);
   }
 }
