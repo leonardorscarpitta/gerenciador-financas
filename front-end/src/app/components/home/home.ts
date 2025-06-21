@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { TableStock } from "../table-stock/table-stock";
-import { AddStock } from "../add-stock/add-stock";
+import { TableStock } from "../acao/table-stock/table-stock";
+import { AddStock } from "../acao/add-stock/add-stock";
 
 @Component({
   selector: 'app-home',
