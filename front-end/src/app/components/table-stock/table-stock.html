@@ -2,14 +2,14 @@
   <thead class="bg-gray-200 font-bold">
     <tr>
       <th class="p-4">Nome</th>
-      <th class="p-4">Valor Atual</th>
+      <th class="p-4">Valor da Ação</th>
       <th class="p-4">Valor de Compra</th>
       <th class="p-4">Quantidade</th>
-      <th class="p-4">Valor Investido</th>
-      <th class="p-4">Resultado</th>
-      <th class="p-4">Data</th>
-      <th class="p-4">Tipo de ação</th>
-      <th class="p-4">Remoção de Ação</th>
+      <th class="p-4">Valor Gasto</th>
+      <th class="p-4">Lucro</th>
+      <!-- <th class="p-4">Data</th> -->
+      <th class="p-4">Tipo</th>
+      <th class="p-4">Remover</th>
     </tr>
   </thead>
 
@@ -26,21 +26,24 @@
         <td class="text-center p-6 font-extrabold">
           <a class="hover:opacity-70" target="_blank" [href]="stockService.getStockUrl(stock.nome)">{{ stock.nome }}</a>
         </td>
-        <td class="text-center p-6">R$ {{ stock.valorAtual }}</td>
-        <td class="text-center p-6">R$ {{ stock.valorCompra }}</td>
+        <td class="text-center p-6">{{ stock.valorAtual | currency:"BRL" }}</td>
+        <td class="text-center p-6">{{ stock.valorCompra | currency:"BRL" }}</td>
         <td class="text-center p-6">{{ stock.quantidade }}</td>
-        <td class="text-center p-6">R$ {{ stock.valorCompra * stock.quantidade }}</td>
+        <td class="text-center p-6">{{ stock.valorCompra | currency:"BRL" }}</td>
         <td class="text-center p-6" [style.color]="(stock.valorAtual - stock.valorCompra) * stock.quantidade >= 0 ? 'green' : 'red'">
-          R$ {{ (stock.valorAtual - stock.valorCompra) * stock.quantidade }}
+          {{ (stock.valorAtual - stock.valorCompra / stock.quantidade) * stock.quantidade | currency:"BRL" }}
         </td>
-        <td class="text-center p-6">{{ stock.timestamp }}</td>
+        <!-- <td class="text-center p-6">{{ stock.timestamp }}</td> -->
         <td class="text-center p-6">{{ stock.tipoAcao }}</td>
-        <td (click)="removeStock(i)" class="hover:opacity-80 cursor-pointer">❌</td>
+        <td (click)="removeStock(i)" class="hover:opacity-80 cursor-pointer">✖</td>
       </tr>
     }
     @if (stockService.getStocks().length > 0) {
       <tr>
-        <td class="text-center p-6" colspan="9">{{ stockService.report() }}</td>
+        <td class="text-center p-6" colspan="9">
+          Ganhos totais: 
+          <span class="font-bold" [style.color]="stockService.report() >= 0 ? 'green' : 'red'">{{ stockService.report() | currency:"BRL" }}</span>
+        </td>
       </tr>
     }
   </tbody>
