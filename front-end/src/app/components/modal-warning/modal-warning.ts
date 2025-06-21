@@ -6,9 +6,19 @@ import { Component } from '@angular/core';
   templateUrl: './modal-warning.html'
 })
 export class ModalWarning {
-  showAlert = true;
+  private readonly MODAL_KEY = "modalAppeared";
+  showModal: boolean = true;
 
+  checkToShowAlert() {
+    if (!(localStorage.getItem("modalAppeared") == "true")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
   closeModal() {
-    this.showAlert = false;
+    localStorage.setItem(this.MODAL_KEY, "true");
+    this.showModal = !this.showModal;  
   }
 }

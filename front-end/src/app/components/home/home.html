@@ -4,11 +4,11 @@
     <app-add-stock></app-add-stock>
     <app-table-stock></app-table-stock>
     <!-- <app-add-csv></app-add-csv> -->
-    <button (click)="changeShowOnlyTableStatus()" class="cursor-pointer bg-[#999999] text-white font-bold p-2 rounded-full">Mostrar apenas a tabela ➡</button>
+    <img class="cursor-pointer hover:opacity-75" (click)="changeShowOnlyTableStatus()" src="https://img.icons8.com/pulsar-gradient/48/long-arrow-right.png" alt="switch-off" alt="switch-on--v1" alt="off">
   </main>
 } @else {
   <main class="flex flex-col gap-y-8 items-center justify-center m-4">
-    <button (click)="changeShowOnlyTableStatus()" class="cursor-pointer bg-[#999999] text-white font-bold p-2 rounded-full">◀ Visualização completa</button>
     <app-table-stock></app-table-stock>
+    <img class="cursor-pointer hover:opacity-75" (click)="changeShowOnlyTableStatus()" src="https://img.icons8.com/pulsar-gradient/48/long-arrow-left.png" alt="switch-on--v1" alt="on">
   </main>
 }
