@@ -9,12 +9,44 @@ import { Stock } from '../../services/stock-service/stock';
   templateUrl: './add-stock.html'
 })
 export class AddStock {
-  stockSerivce: Stock = inject(Stock);
+  stockService: Stock = inject(Stock);
 
   nome: string = '';
   valorAtual: number = 0;
   valorCompra: number = 0;
   quantidade: number = 0;
+
+  private searchTimeout: any;
+  isSearching: boolean = false;
+
+  onStockNameChange(value: string): void {
+    this.nome = value;
+    
+    // Limpar timeout anterior
+    if (this.searchTimeout) {
+      clearTimeout(this.searchTimeout);
+    }
+
+    // Aguardar 1.5 segundos após parar de digitar
+    this.searchTimeout = setTimeout(async () => {
+      if (value.trim().length >= 3) {
+        await this.fetchStockPrice(value.trim());
+      }
+    }, 1500);
+  }
+
+  private async fetchStockPrice(stockName: string): Promise<void> {
+    this.isSearching = true;
+    
+    try {
+      this.valorAtual = await this.stockService.getStockPrice(stockName);
+    } catch (error) {
+      console.log('Erro ao buscar preço:', error);
+      this.valorAtual = 0;
+    } finally {
+      this.isSearching = false;
+    }
+  }
 
   formatStockType(name: string): string {
     const stockValue = name.match(/\d+$/);
@@ -43,38 +75,30 @@ export class AddStock {
   }
 
   addStock(): void {
-    const alreadyExists = this.stockSerivce.findStockByName(this.nome);
+    const currentDate = new Date();
+    const day = currentDate.getDate();
+    const month = currentDate.getMonth() + 1;
+    const year = currentDate.getFullYear();
+    const hour = currentDate.getHours().toString().padStart(2, "0");
+    const minute = currentDate.getMinutes().toString().padStart(2, "0");
 
-    if (!this.nome || this.nome.trim().length == 0) {
-      alert("O nome não pode estar vazio!")
-      return;
-    }
+    const formatedTime = `${day}/${month}/${year} - ${hour}:${minute}`;
 
-    if (this.valorCompra <= 0 || this.quantidade <= 0) {
-      alert("Preenhcha os dados corretamente!")
-      return;
-    }
-    
-    if (alreadyExists) {
-      alreadyExists.valorCompra += this.valorCompra;
-    } else {
-      const currentDate = new Date();
-      const formatedTime = `${currentDate.getDate()}/${currentDate.getMonth() + 1}/${currentDate.getFullYear()} - ${currentDate.getHours()}:${currentDate.getMinutes().toString().padStart(2, "0")}`;
+    const newStock: STOCK = {
+      nome: this.nome,
+      quantidade: this.quantidade,
+      valorCompra: this.valorCompra,
+      valorAtual: this.valorAtual,
+      timestamp: formatedTime,
+      tipoAcao: this.formatStockType(this.nome)
+    };
 
-      const newStock: STOCK = {
-        nome: this.nome.toUpperCase(),
-        valorAtual: this.valorAtual,
-        valorCompra: this.valorCompra,
-        quantidade: this.quantidade,
-        timestamp: formatedTime,
-        tipoAcao: this.formatStockType(this.nome)
-      }
-      this.nome = "";
-      this.quantidade = 0;
-      this.valorCompra = 0;
-      this.quantidade = 0;
-      this.stockSerivce.addStock(newStock);
-    }
+    this.stockService.addStock(newStock);
 
+    // Limpar formulário
+    this.nome = "";
+    this.quantidade = 0;
+    this.valorCompra = 0;
+    this.valorAtual = 0;
   }
 }

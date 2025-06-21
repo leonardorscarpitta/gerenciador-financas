@@ -1,35 +1,45 @@
-<section class="p-8 flex gap-x-8 items-center rounded-4xl shadow-xl text-[#444]">
+<section class="p-8 flex gap-x-8 items-center rounded-4xl shadow-xl text-[#eee]">
 
-  <img (click)="stockSerivce.clearAllStocks()" class="cursor-pointer hover:opacity-60" width="50" height="50" src="https://img.icons8.com/ios-filled/50/bursts.png" alt="bursts"/>
-
-  <div class="flex flex-col gap-y-2">
-    <p class="text-2xl">Nome da ação</p>
+  <div class="flex flex-col gap-y-2 bg-[#0376b7] w-[25%] h-30 p-4 rounded-lg">
+    <p class="text-lg">
+      Nome da ação
+      <br>
+      <small class="text-xs text-gray-200">Preço atual: {{ valorAtual | currency:"BRL" }}</small>
+    </p>
     <input 
-      [value]="nome"
+      [value]="nome.toUpperCase()"
       (input)="nome = $any($event.target).value"
-      class="placeholder-gray-500 border-1 rounded-lg px-1 border-gray-300"
+      class="placeholder-gray-300 border-1 rounded-lg px-1 border-gray-300 mt-auto"
       type="text"
       placeholder="Digite o nome da ação"
     >
   </div>
 
-  <div class="flex flex-col gap-y-2">
-    <p class="text-2xl">Quantidade Comprada</p>
+  <div class="flex flex-col gap-y-2 bg-[#374e88] w-[25%] h-30 p-4 rounded-lg">
+    <p class="text-lg">
+      Quantidade Comprada
+      <br>
+      <small class="text-xs text-gray-200">Quantidade de {{ nome ? nome.toUpperCase() : "ações" }}</small>
+    </p>
     <input
       [value]="quantidade"
       (input)="quantidade = + $any($event.target).value"
-      class="placeholder-gray-500 border-1 rounded-lg px-1 border-gray-300"
+      class="placeholder-gray-500 border-1 rounded-lg px-1 border-gray-300 mt-auto"
       type="number"
       placeholder="0"
     >
   </div>
 
-  <div class="flex flex-col gap-y-2">
-    <p class="text-2xl">Valor</p>
+  <div class="flex flex-col gap-y-2 bg-[#54803a] w-[25%] h-30 p-4 rounded-lg">
+    <p class="text-lg">
+      Valor total gasto
+      <br>
+      <small class="text-xs text-gray-200">Valor por ação: {{ valorCompra / quantidade | currency:"BRL" }}</small>
+    </p>
     <input
       [value]="valorCompra"
       (input)="valorCompra = $any($event.target).value"
-      class="placeholder-gray-500 border-1 rounded-lg px-1 border-gray-300"
+      class="placeholder-gray-500 border-1 rounded-lg px-1 border-gray-300 mt-auto"
       type="number"
       placeholder="0"
     >
