@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { STOCK } from '../../mock-acoes';
+import { StockApi } from '../stock-api/stock-api';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class Stock {
   private readonly STORAGE_KEY = "stocks_data";
   private stocks: STOCK[] = [];
 
-  constructor() {
+  constructor(private stockApiService: StockApi) {
     this.loadFromStorage();
   }
 
@@ -30,9 +31,54 @@ export class Stock {
     return this.stocks;
   }
 
-  addStock(stock: STOCK): void {
-    this.stocks.push(stock);
-    this.saveToStorage();
+  async getStockPrice(stockName: string): Promise<number> {
+    try {
+      return await this.stockApiService.getStockQuote(stockName);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async addStock(stock: STOCK): Promise<void> {
+    if (!stock.nome || stock.nome.trim().length == 0) {
+      alert("O nome não pode estar vazio!")
+      return;
+    }
+
+    if (stock.valorCompra <= 0 || stock.quantidade <= 0) {
+      alert("Preenhcha os dados corretamente!")
+      return;
+    }
+
+    const newQuantidade = Number(stock.quantidade);
+    const newValorCompra = Number(stock.valorCompra);
+
+    try {
+      stock.valorAtual = await this.stockApiService.getStockQuote(stock.nome);
+  
+      const alreadyExists = this.findStockByName(stock.nome);
+  
+      if (alreadyExists) {
+        const stockId = this.stocks.findIndex(s => s.nome == alreadyExists.nome);
+        
+        const existingQuantidade = Number(this.stocks[stockId].quantidade);
+        const existingValorCompra = Number(this.stocks[stockId].valorCompra);
+        
+        // SOMAR os valores ao invés de calcular média
+        this.stocks[stockId].quantidade = existingQuantidade + newQuantidade;
+        this.stocks[stockId].valorCompra = existingValorCompra + newValorCompra; // SOMA
+        this.stocks[stockId].valorAtual = Number(stock.valorAtual);
+        this.stocks[stockId].timestamp = stock.timestamp;
+        
+        this.saveToStorage();        
+        return;
+      }
+  
+      this.stocks.push(stock);
+      this.saveToStorage();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   removeStock(index: number): void {
@@ -62,35 +108,14 @@ export class Stock {
     return `https://br.tradingview.com/symbols/BMFBOVESPA-${stockFormatedName}/`;
   }
 
-  report(): string {
-    let profits = 0;
-    const stockList = this.getStocks();
+  report(): number {
+    let countValue: number = 0;
 
-    const initialValue: number = (stockList[0].valorCompra * stockList[0].quantidade) - (stockList[0].valorAtual * stockList[0].quantidade);
-
-    let bestStockName: string = stockList[0].nome;
-    let worstStockName: string = stockList[0].nome;
-    let bestStockValue: number = initialValue;
-    let worstStockValue: number = initialValue;
-
-    for (var stock of stockList) {
-      const value: number = - (stock.valorAtual * stock.quantidade) - (stock.valorCompra * stock.quantidade);
-      
-      if (value > bestStockValue) {
-        bestStockValue = value;
-        bestStockName = stock.nome;
-      }
-      if (value < worstStockValue) {
-        worstStockValue = value;
-        worstStockName = stock.nome;
-      };
-      profits += value;
+    for (var stock of this.stocks) {
+      const gains: number = (stock.valorAtual - stock.valorCompra / stock.quantidade) * stock.quantidade;
+      countValue += gains;
     }
 
-    return profits > 0
-      ? `Você está com uma margem de lucro de R$ ${profits}! Sua melhor ação até o momento é a ${bestStockName}`
-      : profits == 0
-        ? `Você está no meio termo com R$ ${profits} em lucros!`
-        : `Você está com um prejuízo de R$ ${profits}! Sua pior ação até o momento é a ${worstStockName}`
+    return countValue;
   }
 }
