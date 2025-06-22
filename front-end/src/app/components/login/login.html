@@ -1,0 +1,80 @@
+
+
+<section class="flex flex-col gap-y-8 min-h-lvh justify-center items-center bg-[#333]">
+  <div class="justify-center items-center flex flex-col gap-y-4 p-12 shadow-2xl rounded-lg bg-white">
+    <img class="shadow-xl/30 rounded-lg p-2" width="50" height="50" src="https://img.icons8.com/ios/50/enter-2.png" alt="enter-2"/>
+    @if (userAlreadyHasAccount) {
+      <h2 class="font-bold text-2xl">Login</h2>
+
+      <div class="relative">
+        <img  
+          class="absolute left-3 top-1/2 transform -translate-y-1/2 z-10"
+          width="24" 
+          height="24" 
+          src="https://img.icons8.com/puffy-filled/32/user.png" alt="user"
+        />
+        <input class="pl-12 p-2 bg-[#eee] rounded-lg" placeholder="Digite seu usuário" type="text">
+      </div>
+
+      <div class="relative">
+        <img
+          class="absolute left-3 top-1/2 transform -translate-y-1/2 z-10"
+          width="24" 
+          height="24" 
+          src="https://img.icons8.com/deco-glyph/48/password.png" alt="password--v1"
+        />
+        <input class="pl-12 p-2 bg-[#eee] rounded-lg" placeholder="Digite sua senha" type="text">
+      </div>
+
+      <span>Ainda não é um usuário? <button (click)="changeToRegisterScreen()">Criar Conta</button> </span>
+
+      <button (click)="login()" class="cursor-pointer hover:opacity-80 bg-[#374e88] font-semibold text-white py-3 px-6 rounded-full">Acessar Conta</button>
+    } @else {
+      <h2 class="font-bold text-2xl">Cadastro</h2>
+
+      <div class="relative">
+        <img  
+          class="absolute left-3 top-1/2 transform -translate-y-1/2 z-10"
+          width="24" 
+          height="24" 
+          src="https://img.icons8.com/sf-black-filled/64/new-post.png" alt="new-post--v1"
+        />
+        <input class="pl-12 p-2 bg-[#eee] rounded-lg" placeholder="Digite seu e-mail" type="text">
+      </div>
+
+      <div class="relative">
+        <img  
+          class="absolute left-3 top-1/2 transform -translate-y-1/2 z-10"
+          width="24" 
+          height="24" 
+          src="https://img.icons8.com/puffy-filled/32/user.png" alt="user"
+        />
+        <input class="pl-12 p-2 bg-[#eee] rounded-lg" placeholder="Digite seu usuário" type="text">
+      </div>
+
+      <div class="relative">
+        <img
+          class="absolute left-3 top-1/2 transform -translate-y-1/2 z-10"
+          width="24" 
+          height="24" 
+          src="https://img.icons8.com/deco-glyph/48/password.png" alt="password--v1"
+        />
+        <input class="pl-12 p-2 bg-[#eee] rounded-lg" placeholder="Digite sua senha" type="text">
+      </div>
+
+      <div class="relative">
+        <img
+          class="absolute left-3 top-1/2 transform -translate-y-1/2 z-10"
+          width="24" 
+          height="24" 
+          src="https://img.icons8.com/deco-glyph/48/password.png" alt="password--v1"
+        />
+        <input class="pl-12 p-2 bg-[#eee] rounded-lg" placeholder="Confirme sua senha" type="text">
+      </div>
+
+      <span>Já é um usuário? <button (click)="changeToRegisterScreen()">Acessar Conta</button> </span>
+
+      <button (click)="register()" class="cursor-pointer hover:opacity-80 bg-[#374e88] font-semibold text-white py-3 px-6 rounded-full">Acessar Conta</button>
+    }
+  </div>
+</section>
