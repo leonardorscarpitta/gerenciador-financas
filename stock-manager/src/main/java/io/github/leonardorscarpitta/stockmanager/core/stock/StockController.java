@@ -2,9 +2,11 @@ package io.github.leonardorscarpitta.stockmanager.core.stock;
 
 import io.github.leonardorscarpitta.stockmanager.core.stock.dto.StockRequestDTO;
 import io.github.leonardorscarpitta.stockmanager.core.stock.dto.StockResponseDTO;
+import io.github.leonardorscarpitta.stockmanager.core.user.User;
 import io.github.leonardorscarpitta.stockmanager.utils.ManageResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -20,8 +22,11 @@ public class StockController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<HashMap<String, Object>> addNewStock(@RequestBody StockRequestDTO stockRequestDTO) {
-        StockResponseDTO stockResponseDTO = stockService.addNewStock(stockRequestDTO);
+    public ResponseEntity<HashMap<String, Object>> addNewStock(
+            @RequestBody StockRequestDTO stockRequestDTO,
+            Authentication authentication) {
+        User currentUser = (User) authentication.getPrincipal();
+        StockResponseDTO stockResponseDTO = stockService.addNewStock(stockRequestDTO, currentUser);
 
         HashMap<String, Object> response = ManageResponse.manage(
                 HttpStatus.CREATED,
