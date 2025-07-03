@@ -1,7 +1,7 @@
-package io.github.leonardorscarpitta.stockmanager.stock.dto;
+package io.github.leonardorscarpitta.stockmanager.core.stock.dto;
 
-import io.github.leonardorscarpitta.stockmanager.stock.Stock;
-import io.github.leonardorscarpitta.stockmanager.user.User;
+import io.github.leonardorscarpitta.stockmanager.core.stock.Stock;
+import io.github.leonardorscarpitta.stockmanager.core.user.User;
 
 import java.math.BigDecimal;
 import java.util.UUID;

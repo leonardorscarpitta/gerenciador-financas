@@ -1,18 +1,20 @@
-package io.github.leonardorscarpitta.stockmanager.user;
+package io.github.leonardorscarpitta.stockmanager.core.user;
 
-import io.github.leonardorscarpitta.stockmanager.stock.dto.StockResponseDTO;
-import io.github.leonardorscarpitta.stockmanager.user.dto.UserRequestDTO;
-import io.github.leonardorscarpitta.stockmanager.user.dto.UserResponseDTO;
+import io.github.leonardorscarpitta.stockmanager.core.user.dto.UserRequestDTO;
+import io.github.leonardorscarpitta.stockmanager.core.user.dto.UserResponseDTO;
+import io.github.leonardorscarpitta.stockmanager.utils.ManageResponse;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/auth/user")
 public class UserController {
 
     private final UserService userService;
@@ -22,11 +24,24 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public HashMap<String, Object> createUser(@RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<HashMap<String, Object>> createUser(@RequestBody UserRequestDTO userRequestDTO) {
         UserResponseDTO userResponseDTO = userService.createUser(userRequestDTO);
-        HashMap<String, Object> response = new HashMap<>();
-        response.put("status", HttpStatus.CREATED);
-        response.put("created_user", userResponseDTO.id());
-        return response;
+
+        HashMap<String, Object> response = ManageResponse.manage(
+                HttpStatus.CREATED,
+                "user registered",
+                userResponseDTO
+        );
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Map<String, Object>> logUser(@RequestBody UserRequestDTO userRequestDTO) {
+        String tokenJWT = userService.logUser(userRequestDTO);
+
+        Map<String, Object> response = Map.of("token", tokenJWT);
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(response);
     }
 }

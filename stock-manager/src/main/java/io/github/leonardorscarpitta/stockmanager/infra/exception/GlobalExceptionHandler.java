@@ -1,4 +1,4 @@
-package io.github.leonardorscarpitta.stockmanager.exception;
+package io.github.leonardorscarpitta.stockmanager.infra.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

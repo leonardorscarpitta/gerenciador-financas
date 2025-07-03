@@ -1,7 +1,6 @@
-package io.github.leonardorscarpitta.stockmanager.user.dto;
+package io.github.leonardorscarpitta.stockmanager.core.user.dto;
 
 public record UserRequestDTO(
-        String username,
         String email,
         String password
 ) {}
