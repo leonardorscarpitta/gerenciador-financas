@@ -1,4 +1,4 @@
-package io.github.leonardorscarpitta.stockmanager.core.stock.dto;
+package io.github.leonardorscarpitta.stockmanager.domain.stock.dto;
 
 import java.math.BigDecimal;
 

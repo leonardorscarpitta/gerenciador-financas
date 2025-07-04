@@ -1,7 +1,7 @@
-package io.github.leonardorscarpitta.stockmanager.core.user.dto;
+package io.github.leonardorscarpitta.stockmanager.domain.user.dto;
 
-import io.github.leonardorscarpitta.stockmanager.core.user.User;
-import io.github.leonardorscarpitta.stockmanager.core.user.UserRole;
+import io.github.leonardorscarpitta.stockmanager.domain.user.User;
+import io.github.leonardorscarpitta.stockmanager.domain.user.UserRole;
 
 import java.util.UUID;
 

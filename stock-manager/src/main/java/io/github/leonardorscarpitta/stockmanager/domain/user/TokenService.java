@@ -1,10 +1,9 @@
-package io.github.leonardorscarpitta.stockmanager.core.user.dto.token;
+package io.github.leonardorscarpitta.stockmanager.domain.user;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import io.github.leonardorscarpitta.stockmanager.core.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 

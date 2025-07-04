@@ -1,4 +1,4 @@
-package io.github.leonardorscarpitta.stockmanager.core.user;
+package io.github.leonardorscarpitta.stockmanager.domain.user;
 
 import lombok.Getter;
 

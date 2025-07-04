@@ -1,4 +1,4 @@
-package io.github.leonardorscarpitta.stockmanager.core.user.dto;
+package io.github.leonardorscarpitta.stockmanager.domain.user.dto;
 
 public record UserRequestDTO(
         String email,

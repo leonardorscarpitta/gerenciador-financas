@@ -1,8 +1,8 @@
-package io.github.leonardorscarpitta.stockmanager.core.stock;
+package io.github.leonardorscarpitta.stockmanager.domain.stock;
 
-import io.github.leonardorscarpitta.stockmanager.core.stock.dto.StockRequestDTO;
-import io.github.leonardorscarpitta.stockmanager.core.stock.dto.StockResponseDTO;
-import io.github.leonardorscarpitta.stockmanager.core.user.User;
+import io.github.leonardorscarpitta.stockmanager.domain.stock.dto.StockRequestDTO;
+import io.github.leonardorscarpitta.stockmanager.domain.stock.dto.StockResponseDTO;
+import io.github.leonardorscarpitta.stockmanager.domain.user.User;
 import org.springframework.stereotype.Service;
 
 @Service

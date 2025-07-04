@@ -1,6 +1,6 @@
-package io.github.leonardorscarpitta.stockmanager.core.stock;
+package io.github.leonardorscarpitta.stockmanager.domain.stock;
 
-import io.github.leonardorscarpitta.stockmanager.core.stock.dto.StockResponseDTO;
+import io.github.leonardorscarpitta.stockmanager.domain.stock.dto.StockResponseDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

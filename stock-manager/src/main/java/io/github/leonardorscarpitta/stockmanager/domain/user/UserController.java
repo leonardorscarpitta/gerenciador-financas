@@ -1,7 +1,7 @@
-package io.github.leonardorscarpitta.stockmanager.core.user;
+package io.github.leonardorscarpitta.stockmanager.domain.user;
 
-import io.github.leonardorscarpitta.stockmanager.core.user.dto.UserRequestDTO;
-import io.github.leonardorscarpitta.stockmanager.core.user.dto.UserResponseDTO;
+import io.github.leonardorscarpitta.stockmanager.domain.user.dto.UserRequestDTO;
+import io.github.leonardorscarpitta.stockmanager.domain.user.dto.UserResponseDTO;
 import io.github.leonardorscarpitta.stockmanager.utils.ManageResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

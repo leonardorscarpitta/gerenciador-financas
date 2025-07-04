@@ -1,4 +1,4 @@
-package io.github.leonardorscarpitta.stockmanager.core.user;
+package io.github.leonardorscarpitta.stockmanager.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
