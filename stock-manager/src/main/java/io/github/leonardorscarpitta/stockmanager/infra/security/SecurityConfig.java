@@ -1,6 +1,6 @@
 package io.github.leonardorscarpitta.stockmanager.infra.security;
 
-import io.github.leonardorscarpitta.stockmanager.core.user.UserRepository;
+import io.github.leonardorscarpitta.stockmanager.domain.user.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -34,9 +34,8 @@ public class SecurityConfig {
     };
 
     private final String[] AUTHORIZED_POST_ACCESS = {
-            "/auth/user/register",
-            "/auth/user/login",
-            "/api/stock/add"
+            "/auth/user/**",
+            "/api/stock/**"
     };
 
     @Bean

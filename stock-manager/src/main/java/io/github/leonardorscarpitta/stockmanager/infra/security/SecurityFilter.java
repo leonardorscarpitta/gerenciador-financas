@@ -1,7 +1,7 @@
 package io.github.leonardorscarpitta.stockmanager.infra.security;
 
-import io.github.leonardorscarpitta.stockmanager.core.user.UserRepository;
-import io.github.leonardorscarpitta.stockmanager.core.user.dto.token.TokenService;
+import io.github.leonardorscarpitta.stockmanager.domain.user.UserRepository;
+import io.github.leonardorscarpitta.stockmanager.domain.user.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
