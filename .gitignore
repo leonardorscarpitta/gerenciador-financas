@@ -1,0 +1,65 @@
+# ===================================================================
+# ARQUIVO .GITIGNORE OTIMIZADO PARA MONOREPO
+# Stack: Java/Spring (Back-end) + Angular (Front-end)
+# ===================================================================
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+/libpeerconnection.log
+testem.log
+.env
+.env.*
+!.env.example
+.idea/
+*.iws
+*.iml
+*.ipr
+*.properties
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache
+/nbproject/private/
+/nbbuild/
+/nbdist/
+/.nb-gradle/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+.c9/
+*.sublime-workspace
+
+# ===================================================================
+# BACK-END (Java / Spring)
+# ===================================================================
+stock-manager/src/main/resources/application.properties
+stock-manager/target/
+stock-manager/build/
+stock-manager/.gradle/
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+# ===================================================================
+# FRONT-END (Angular)
+# ===================================================================
+front-end/node_modules/
+front-end/dist/
+front-end/tmp/
+front-end/out-tsc/
+front-end/bazel-out/
+front-end/coverage/
+front-end/.angular/cache/
+front-end/.sass-cache/
+front-end/connect.lock
+front-end/typings/
